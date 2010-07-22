@@ -27,7 +27,7 @@ to your `$PATH` for more convenient usage.
 
 Usage
 -----
-<pre>Usage: ./gozintogra.php [ options ]
+<pre>Usage: ./gozintogra.php [ options ] FILE [,FILE [, ...]]
 --usage|-u           Usage - this text
 --help|-h            Help (alias for --usage|-u)
 --version|-V         Version
