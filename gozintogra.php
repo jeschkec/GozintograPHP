@@ -225,10 +225,6 @@ try
     {
         throw new Exception('Can not start map element');
     }
-<<<<<<< .mine
-=======
-
->>>>>>> .r20
 }
 catch(Exception $objException)
 {
