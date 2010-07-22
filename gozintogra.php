@@ -1,4 +1,4 @@
-#!which php
+#! /usr/bin/php
 <?php
 /**
  *  @see        <http://gozintographp.org>
