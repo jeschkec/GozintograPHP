@@ -161,7 +161,6 @@ catch(Zend_Console_Getopt_Exception $objException)
     echo $objException->getUsageMessage();
     exit(3);
 }
-;
 
 //  Should the help or the usage be shown?
 if( (true === isset($objOptions->u)) or (true === isset($objOptions->h)) )
