@@ -1,7 +1,7 @@
 GozintograPHP - a gozintograph for PHP
 ======================================
 
-Visit [GozintograPHP.org](http://gozintographp.org/ Project Homepage]!
+Visit [GozintograPHP.org](http://gozintographp.org/ Project Homepage)!
 
 Introduction
 ------------
