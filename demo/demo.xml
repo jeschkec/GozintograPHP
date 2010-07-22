@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<map>
+  <source file="demo.php">
+    <entry method="include" target="foo.php"/>
+    <entry method="include_once" target="bar.php"/>
+    <entry method="require" target="foo.php"/>
+    <entry method="require_once" target="bar.php"/>
+    <entry method="include" target="$foo"/>
+  </source>
+</map>
