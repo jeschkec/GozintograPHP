@@ -13,7 +13,7 @@ Andrew Vazsonyi.
 Requirements
 ------------
  - `PHP 5.1.2`
- - `Zend_Cli` (bundled)
+ - `Zend_Console_Getopt` (bundled)
  - `Perl 5` (for Perl image generator)
  - `GraphViz` (for Perl image generator)
  - `XML::Parser` (for Perl image generator)
