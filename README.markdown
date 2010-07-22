@@ -24,3 +24,13 @@ Installation
 ------------
 Download / checkout the complete source and extract it to a directory for your choice. You might add it
 to your `$PATH` for more convenient usage.
+
+Usage
+-----
+<pre>Usage: ./gozintogra.php [ options ]
+--usage|-u           Usage - this text
+--help|-h            Help (alias for --usage|-u)
+--version|-V         Version
+--copyright|-c       Copyright statement</pre>
+
+
