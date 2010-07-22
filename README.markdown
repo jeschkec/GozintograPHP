@@ -1,6 +1,8 @@
 GozintograPHP - a gozintograph for PHP
 ======================================
 
+Visit [GozintograPHP.org](http://gozintographp.org/ Project Homepage]!
+
 Introduction
 ------------
 A gozintograph is a directed (asymmetric) graph taken from **manufacturing and procution theory** 
@@ -10,13 +12,13 @@ Andrew Vazsonyi.
 
 Requirements
 ------------
- - PHP 5.1.2
- - Zend_Cli (bundled)
- - Perl 5 (for Perl image generator)
- - GraphViz (for Perl image generator)
- - XML::Parser (for Perl image generator)
- - XML::Simple (for Perl image generator)
- - XML::SimpleObject (for Perl image generator)
+ - `PHP 5.1.2`
+ - `Zend_Cli` (bundled)
+ - `Perl 5` (for Perl image generator)
+ - `GraphViz` (for Perl image generator)
+ - `XML::Parser` (for Perl image generator)
+ - `XML::Simple` (for Perl image generator)
+ - `XML::SimpleObject` (for Perl image generator)
 
 Installation
 ------------
