@@ -1,13 +1,11 @@
 #! /usr/bin/php
 <?php
 /**
- *  @see        <http://gozintographp.org>
- *  @author     Christoph Jeschke <jeschkec@gozintographp.org>
- *  @version    $Rev: 21 $ $Date: 2009-01-24 14:29:27 +0100 (Sa, 24. Jan 2009) $
+ *  @see        https://github.com/jeschkec/GozintograPHP
+ *  @author     Christoph Jeschke <gozintographp@christoph-jeschke.de>
  *  @package    GozintograPHP
- *  @license    BSD Style License http://gozintographp.org/#License
+ *  @license    BSD Style License https://github.com/jeschkec/GozintograPHP/blob/master/LICENSE
  *  @copyright  (c) 2008 Christoph Jeschke
- *  @tutorial   http://gozintographp.org/#Intro
  */
 
 /**
@@ -104,7 +102,7 @@ function copyright()
 {
     version();
     printf('(c) Christoph Jeschke%s', PHP_EOL);
-    printf('Report bugs to <jeschkec@gozintographp.org>%s', PHP_EOL);
+    printf('Report bugs to <gozintograph@christoph-jeschke.de>%s', PHP_EOL);
 }
 
 /**
@@ -238,7 +236,7 @@ foreach($arrFiles as $File)
 {
     try
     {
-        $objGozinto =   new GozintograPHP($File);
+        $objGozinto = new GozintograPHP($File);
         $objGozinto->read();
         $objGozinto->parse();
         $objGozinto->dump(new XMLWriter);

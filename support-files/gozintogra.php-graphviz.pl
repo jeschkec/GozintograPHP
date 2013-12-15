@@ -1,7 +1,6 @@
 #! /usr/bin/perl
 ###############################################################################
-#   (c) by Christoph Jeschke 
-#   $Id: gozintogra.php-graphviz 8 2008-11-03 14:29:46Z jeschkec $
+#   (c) 2013 by Christoph Jeschke
 ###############################################################################
 use strict;
 use GraphViz;

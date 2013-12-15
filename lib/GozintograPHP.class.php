@@ -2,13 +2,11 @@
 /**
  *  GozintograPHP
  *
- *  @see        <http://gozintographp.org>
- *  @author     Christoph Jeschke <jeschkec@gozintographp.org>
- *  @version    $Rev: 22 $ $Date: 2009-01-24 14:31:39 +0100 (Sa, 24. Jan 2009) $
+ *  @see        https://github.com/jeschkec/GozintograPHP
+ *  @author     Christoph Jeschke <gozintographp@christoph-jeschke.de>
  *  @package    GozintograPHP
- *  @license    BSD Style License http://gozintographp.org/#License
+ *  @license    BSD Style License https://github.com/jeschkec/GozintograPHP/blob/master/LICENSE
  *  @copyright  (c) 2008 Christoph Jeschke
- *  @tutorial   http://gozintographp.org/#Intro
  */
 final class GozintograPHP
 {
