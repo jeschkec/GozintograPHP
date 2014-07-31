@@ -13,38 +13,38 @@ final class GozintograPHP
     /**
      *  @var array  Key Zend Inclusion and Require Tokens
      */
-    private $tokIncludes    =       array(
-                                        T_REQUIRE, T_REQUIRE_ONCE,
-                                        T_INCLUDE, T_INCLUDE_ONCE
-                                    );
+    private $includeTokens =  array(
+        T_REQUIRE, T_REQUIRE_ONCE,
+        T_INCLUDE, T_INCLUDE_ONCE
+    );
     
     /**
      *  @var array  Target Zend Tokens
      */
-    private $tokValues          =   array(
-                                        T_CONSTANT_ENCAPSED_STRING, 
-                                        T_STRING, T_VARIABLE
-                                    );
-    
+    private $valueTokens =   array(
+        T_CONSTANT_ENCAPSED_STRING,
+        T_STRING, T_VARIABLE
+    );
+
     /**
      *  @var string Filename of source file, default is <b>NULL</b>
      */
-    private $fileName           =   null;
+    private $fileName =   null;
     
     /**
      *  @var array  Token structure from file, default is <b>NULL</b>
      */
-    private $tokStructure       =   null;
+    private $tokens = null;
     
     /**
      *  @var array  Relevant tokens, default is <b>NULL</b>
      */
-    private $tokRelevant        =   array();
+    private $relevantTokens = array();
     
     /**
      *  @var array XML Structure, default is <b>NULL</b>
      */
-    private $tokXmlStructure    =   null;
+    private $tokenAsXml = null;
     
     /**
      *  Get the created XML Structure
@@ -53,9 +53,9 @@ final class GozintograPHP
      *  
      *  @return mixed
      */
-    final public function getTokXmlStructure()
+    final public function getTokenAsXml()
     {
-        return $this->tokXmlStructure;
+        return $this->tokenAsXml;
     }
     
     /**
@@ -65,14 +65,14 @@ final class GozintograPHP
      *  @return string String without quotes
      *  @throws Exception
      */
-    final public static function stripAllQuotes($stringQuotedValue) 
+    final public static function stripQuotes($quotedValue)
     {
-        if(false === is_string($stringQuotedValue))
+        if(true === is_string($quotedValue))
         {
-            throw new Exception('$stringQuotedValue is not an string');
+            return str_replace(array('"',"'"), '', $quotedValue);
         }
 
-        return str_replace(array('"',"'"), '', $stringQuotedValue);
+        return $quotedValue;
     }
 
     /**
@@ -98,7 +98,7 @@ final class GozintograPHP
 	 */
 	public function __toString()
 	{
-		return $this->getTokXmlStructure();
+		return $this->getTokenAsXml();
 	}
 
     /**
@@ -132,15 +132,15 @@ final class GozintograPHP
             throw new Exception('File ist a way to short');
         }
         
-        $tokAll     =   token_get_all($fileContent);
+        $tokens     =   token_get_all($fileContent);
         
-        if(sizeof($tokAll) < 2)
+        if(sizeof($tokens) < 2)
         {
             throw new Exception('Could not extract enough tokens');
         }
         else
         {
-            $this->tokStructure = $tokAll;
+            $this->tokens = $tokens;
         }
     }
 
@@ -150,42 +150,42 @@ final class GozintograPHP
      */
     final public function parse()
     {
-        $tokTemp    =   array();
+        $tokenStack    =   array();
         
-        if(true === is_null($this->tokStructure))
+        if(true === is_null($this->tokens))
         {
             throw new Exception('Nothing to do. Move along.');
         }
         
-        $tokMergedTokens    =   array_merge($this->tokIncludes, $this->tokValues);
+        $mergedTokens    =   array_merge($this->includeTokens, $this->valueTokens);
     
-        foreach($this->tokStructure as $tokToken)
+        foreach($this->tokens as $token)
         {
-            if(true === in_array($tokToken[0], $tokMergedTokens))
+            if(true === in_array($token[0], $mergedTokens))
             {
-                array_push($tokTemp, $tokToken);
+                array_push($tokenStack, $token);
             }
         }
         
-        $tokTempSize = sizeof($tokTemp);
+        $tokenStackSize = sizeof($tokenStack);
         
-        if($tokTempSize < 2)
+        if($tokenStackSize < 2)
         {
             throw new Exception('Not enough tokens to parse');
         }
         
-        for($i = 0; $i < $tokTempSize; $i++)
+        for($i = 0; $i < $tokenStackSize; $i++)
         {
             if(
-                (true === in_array($tokTemp[$i][0], $this->tokIncludes)) &&
-                (true === in_array($tokTemp[$i+1][0], $this->tokValues))
+                (true === in_array($tokenStack[$i][0], $this->includeTokens)) &&
+                (true === in_array($tokenStack[$i+1][0], $this->valueTokens))
             )
             {
                 array_push(
-                    $this->tokRelevant, 
+                    $this->relevantTokens,
                     array(
-                        'method' => $this->stripAllQuotes($tokTemp["$i"][1]), 
-                        'target' => $this->stripAllQuotes($tokTemp[$i+1][1])
+                        'method' => $this->stripQuotes($tokenStack["$i"][1]),
+                        'target' => $this->stripQuotes($tokenStack[$i+1][1])
                     )
                 );
             }
@@ -193,58 +193,58 @@ final class GozintograPHP
     }
 
     /**
-     *  @param  object  $objXMLWriter   XMLWriter Object
+     *  @param  object  $xmlWriter   XMLWriter Object
      *  @return string                  XML Structure
      *  @throws Exception
      */
-    final public function dump(XMLWriter $objXMLWriter)
+    final public function dump(XMLWriter $xmlWriter)
     {
-        if(false === $objXMLWriter->openMemory())
+        if(false === $xmlWriter->openMemory())
         {
             throw new Exception('Can not open XMLWriter Memory');
         }
         
-        if(false === $objXMLWriter->startElement('source'))
+        if(false === $xmlWriter->startElement('source'))
         {
             throw new Exception('Can not start source element');
         }
         
-        if(false === $objXMLWriter->writeAttribute('file', $this->fileName))
+        if(false === $xmlWriter->writeAttribute('file', $this->fileName))
         {
             throw new Exception('Can not write file attribute to source element');
         }
         
-        foreach($this->tokRelevant as $tokRelevantToken)
+        foreach($this->relevantTokens as $token)
         {
-            if(false === $objXMLWriter->startElement('entry'))
+            if(false === $xmlWriter->startElement('entry'))
             {
-                throw new Exception("Can not start entry element for {$tokRelevantToken['target']}");
+                throw new Exception("Can not start entry element for {$token['target']}");
             }
             
-            if(false === $objXMLWriter->writeAttribute('method', $tokRelevantToken['method']))
+            if(false === $xmlWriter->writeAttribute('method', $token['method']))
             {
-                throw new Exception("Can not write method attribute to {$tokRelevantToken['target']}");
+                throw new Exception("Can not write method attribute to {$token['target']}");
             }
             
-            if(false === $objXMLWriter->writeAttribute('target', $tokRelevantToken['target']))
+            if(false === $xmlWriter->writeAttribute('target', $token['target']))
             {
-                throw new Exception("Can not write target attribute to {$tokRelevantToken['target']}");
+                throw new Exception("Can not write target attribute to {$token['target']}");
             }
         
-            if(false === $objXMLWriter->endElement())
+            if(false === $xmlWriter->endElement())
             {
-                throw new Exception("Can not close entry element for {$tokRelevantToken['target']}");
+                throw new Exception("Can not close entry element for {$token['target']}");
             }    
         }
         
-        if(false === $objXMLWriter->endElement())
+        if(false === $xmlWriter->endElement())
         {
             throw new Exception('Can not close source element');
         }
         
-        $this->tokXmlStructure = $objXMLWriter->outputMemory();
+        $this->tokenAsXml = $xmlWriter->outputMemory();
         
-        return $this->tokXmlStructure;
+        return $this->tokenAsXml;
     }
 }
 ?>

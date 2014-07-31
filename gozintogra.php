@@ -15,9 +15,9 @@
  *  @see    defaultErrorHandler
  *  @param  object  Exception object
  */
-function defaultExceptionHandler($objException)
+function defaultExceptionHandler($exception)
 {
-    trigger_error($objException->getMessage());
+    trigger_error($exception->getMessage());
 }
 
 //  set default exception handler
@@ -44,7 +44,7 @@ set_exception_handler('defaultExceptionHandler');
  */
 function defaultErrorHandler($errNumber, $errMessage, $errFile, $errLine)
 {
-    $errDetails =   array(
+    $errDetails = array(
         date('c'),              //  current ISO8601 formatted date
         $errNumber,             //  Error level number
         $errFile,               //  source file
@@ -76,12 +76,12 @@ ini_set('register_argv_argc', 'On');
  *  Uses the Zend_Console_Getopt getUsageMessage() method to show
  *  usage information
  *
- *  @param  object  $objOptions Zend_Console_Getopt Object
+ *  @param  object  $options Zend_Console_Getopt Object
  *  @see    Zend_Console_Getopt
  */
-function usage(Zend_Console_Getopt $objOptions)
+function usage(Zend_Console_Getopt $options)
 {
-    $objOptions->getUsageMessage();
+    $options->getUsageMessage();
 }
 
 /**
@@ -138,44 +138,44 @@ require_once('Zend/Console/Getopt.php');
  */
 try
 {
-    $arrOptions =   array(
-                        'usage|u'       =>  'Usage - this text',
-                        'help|h'        =>  'Help (alias for --usage|-u)',
-                        'version|V'     =>  'Version',
-                        'copyright|c'   =>  'Copyright statement'
-                    );
+    $options = array(
+        'usage|u' => 'Usage - this text',
+        'help|h' => 'Help (alias for --usage|-u)',
+        'version|V' => 'Version',
+        'copyright|c' => 'Copyright statement'
+    );
 
     //  $objOptions will be a Zend_Console_Getopt object
-    $objOptions =   new Zend_Console_Getopt($arrOptions);
+    $getopt =   new Zend_Console_Getopt($options);
 
     //  set explict case sensitiveness
-    $objOptions->setOption('ignoreCase', false);
+    $getopt->setOption('ignoreCase', false);
 
     //  Parse options
-    $objOptions->parse();
+    $getopt->parse();
 }
-catch(Zend_Console_Getopt_Exception $objException)
+catch(Zend_Console_Getopt_Exception $exception)
 {
-    echo $objException->getUsageMessage();
+    echo $exception->getUsageMessage();
     exit(3);
 }
 
 //  Should the help or the usage be shown?
-if( (true === isset($objOptions->u)) or (true === isset($objOptions->h)) )
+if( (true === isset($getopt->u)) or (true === isset($getopt->h)) )
 {
-    usage($objOptions);
+    usage($getopt);
     exit(0);
 }
 
 //  Should the version information be shown?
-if(true === isset($objOptions->V))
+if(true === isset($getopt->V))
 {
     version();
     exit(0);
 }
 
 //  Should the copyright statement be shown?
-if(true === isset($objOptions->c))
+if(true === isset($getopt->c))
 {
     copyright();
     exit(0);
@@ -187,30 +187,30 @@ if(true === isset($objOptions->c))
  */
 try
 {
-    $arrFiles   =   $objOptions->getRemainingArgs();
+    $files   =   $getopt->getRemainingArgs();
 
     /**
      *  @throws  Zend_Console_Getopt_Exception
      */
-    if(sizeof($arrFiles) == 0)
+    if(sizeof($files) == 0)
     {
-        throw new Zend_Console_Getopt_Exception('No Files given');
+        throw new Zend_Console_Getopt_Exception('No files given');
     }
 }
-catch(Zend_Console_Getopt_Exception $objException)
+catch(Zend_Console_Getopt_Exception $exception)
 {
-    echo $objOptions->getUsageMessage();
+    echo $getopt->getUsageMessage();
     exit(3);
 }
 
 try
 {
-    $objXmlWriter   =   new XMLWriter();
+    $xmlWriter = new XMLWriter();
 
     /**
      *  @throws  Exception
      */
-    if(false === $objXmlWriter->openMemory())
+    if(false === $xmlWriter->openMemory())
     {
         throw new Exception('Can not start XMLWriter memory');
     }
@@ -218,36 +218,36 @@ try
     /**
      *  @throws  Exception
      */
-    if(false === $objXmlWriter->startElement('map'))
+    if(false === $xmlWriter->startElement('map'))
     {
         throw new Exception('Can not start map element');
     }
 }
-catch(Exception $objException)
+catch(Exception $exception)
 {
-    fwrite(STDERR, $objException->getMessage());
+    fwrite(STDERR, $exception->getMessage());
     exit(3);
 }
 
 /**
  *
  */
-foreach($arrFiles as $File)
+foreach($files as $File)
 {
     try
     {
-        $objGozinto = new GozintograPHP($File);
-        $objGozinto->read();
-        $objGozinto->parse();
-        $objGozinto->dump(new XMLWriter);
+        $gozintographp = new GozintograPHP($File);
+        $gozintographp->read();
+        $gozintographp->parse();
+        $gozintographp->dump(new XMLWriter);
     }
-    catch(Exception $objException)
+    catch(Exception $exception)
     {
-        fwrite(STDERR, $objException->getMessage());
+        fwrite(STDERR, $exception->getMessage());
         exit(3);
     }
 
-    $objXmlWriter->writeRaw($objGozinto->getTokXmlStructure());
+    $xmlWriter->writeRaw($gozintographp->getTokenAsXml());
 }
 
 try
@@ -255,19 +255,17 @@ try
     /**
      *  @throws  Exception
      */
-    if(false === $objXmlWriter->endElement())
+    if(false === $xmlWriter->endElement())
     {
         throw new Exception('Can not end XMLWriter memory');
     }
 }
-catch(Exception $objException)
+catch(Exception $exception)
 {
-    fwrite(STDERR, $objException->getMessage());
+    fwrite(STDERR, $exception->getMessage());
     exit(3);
 }
 
 //  write xml stream to STDOUT
-fwrite(STDOUT, $objXmlWriter->outputMemory());
+fwrite(STDOUT, $xmlWriter->outputMemory());
 exit(0);
-
-?>
