@@ -7,7 +7,7 @@ and shows the parts that goes (goz) into. It's name is derived from the fictiona
 Andrew Vazsonyi.
 
 ## Requirements ##
- - `PHP 5.1.2`
+ - `PHP 5.1.2` or newer
  - `Zend_Console_Getopt` (bundled)
  - `Perl 5` (for Perl image generator)
  - `GraphViz` (for Perl image generator)
