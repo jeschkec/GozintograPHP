@@ -30,7 +30,6 @@ to your `$PATH` for more convenient usage.
  - Update `Zend_Console_Getopt`
  - Improve analysis of variable includes
  - Rework usage information
- - Remove hungarian notation
  - Rework `gozintogra.php-graphviz.pl`
     - Allow not only png for output
     - POD documentation
