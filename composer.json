@@ -1,0 +1,23 @@
+{
+    "name": "GozintograPHP",
+    "license": "BSD-3-Clause",
+    "homepage": "https://github.com/jeschkec/GozintograPHP",
+    "authors": [
+        {
+            "name": "Christoph Jeschke",
+            "email": "gozintographp@christoph-jeschke.de",
+            "homepage": "http://christoph-jeschke.de",
+            "role": "lead"
+        }
+    ],
+
+    "support": {
+        "issues": "https://github.com/jeschkec/GozintograPHP/issues"
+    },
+
+    "require": {
+        "php": ">=5.3.3",
+        "zf1/zend-console-getopt": "~1.12",
+        "phploc/phploc": "*"
+    }
+}
