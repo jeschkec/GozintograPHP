@@ -52,7 +52,7 @@ function defaultErrorHandler($errNumber, $errMessage, $errFile, $errLine)
         $errMessage,            //  The error message
     );
 
-    if(false === is_ressource(STDERR)) 
+    if(false === is_resource(STDERR))
     {
         trigger_error('STDERR is not availiable', E_USER_ERROR);
     }
