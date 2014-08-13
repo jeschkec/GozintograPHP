@@ -65,7 +65,7 @@ function defaultErrorHandler($errNumber, $errMessage, $errFile, $errLine)
 set_error_handler('defaultErrorHandler');
 
 //  expand include path to lib/ directory
-ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . dirname(__FILE__) . '/lib');
+ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . dirname(__FILE__));
 
 //  be sure, register_argv_argc will be filled
 ini_set('register_argv_argc', 'On');
@@ -108,13 +108,13 @@ function copyright()
 /**
  *  GozintograPHP is the main library and does all the work
  */
-require_once('GozintograPHP.class.php');
+require_once('lib/GozintograPHP.class.php');
 
 
 /**
  *  Zend_Console_Getopt is used to handle the console options
  */
-require_once('Zend/Console/Getopt.php');
+require 'vendor/autoload.php';
 
 /**
  *  Set up console option (arg) handling

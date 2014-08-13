@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jeschkec/GozintograPHP.svg?branch=master)](https://travis-ci.org/jeschkec/GozintograPHP)
+
 # GozintograPHP - a gozintograph for PHP #
 
 ## Introduction ##
