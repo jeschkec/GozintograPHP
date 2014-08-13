@@ -3,12 +3,3 @@ language: php
 before_script:
   - composer self-update
   - composer install --no-interaction --prefer-source
-
-php:
-
-matrix:
-  allow_failures:
-    - php: hhvm
-
-notifications:
-  email: false
