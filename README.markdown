@@ -29,7 +29,6 @@ to your `$PATH` for more convenient usage.
 --copyright|-c       Copyright statement</pre>
 
 ## Todo ##
- - Update `Zend_Console_Getopt`
  - Improve analysis of variable includes
  - Rework usage information
  - Rework `gozintogra.php-graphviz.pl`
