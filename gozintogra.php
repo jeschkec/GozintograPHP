@@ -99,7 +99,7 @@ function copyright()
 /**
  *  GozintograPHP is the main library and does all the work
  */
-require_once('lib/GozintograPHP.php');
+require_once('lib/Gozintogra.php');
 
 
 /**
