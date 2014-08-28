@@ -36,10 +36,10 @@ set_exception_handler('defaultExceptionHandler');
  *      <li>The line number, on which the error occured</li>
  *  </ul>
  *
- *  @param  int     Error Number
- *  @param  string  Error Message
- *  @param  string  Error file
- *  @param  int     Error line
+ *  @param  int     error number
+ *  @param  string  error message
+ *  @param  string  error file
+ *  @param  int     error line
  *  @return int     1
  */
 function defaultErrorHandler($errNumber, $errMessage, $errFile, $errLine)
@@ -85,14 +85,6 @@ function usage(Zend_Console_Getopt $options)
 }
 
 /**
- *  Show version information
- */
-function version()
-{
-    printf('GozintograPHP %s%s', '$Rev: 21 $', PHP_EOL);
-}
-
-/**
  *  Show copyright information
  *
  *  Extends the version information with copyright informations
@@ -100,9 +92,8 @@ function version()
  */
 function copyright()
 {
-    version();
-    printf('(c) Christoph Jeschke%s', PHP_EOL);
-    printf('Report bugs to <gozintograph@christoph-jeschke.de>%s', PHP_EOL);
+    echo '(c) Christoph Jeschke, 2014', PHP_EOL;
+    echo 'Report bugs to <gozintograph@christoph-jeschke.de>', PHP_EOL;
 }
 
 /**
@@ -127,9 +118,6 @@ require 'vendor/autoload.php';
  *      <kbd>--help</kbd> or <kbd>-h</kbd> is an alias to <kbd>--usage</kbd>
  *  </li>
  *  <li>
- *      <kbd>--version</kbd> or <kbd>-V</kbd> shows the current version
- *  </li>
- *  <li>
  *      <kbd>--copyright</kbd> or <kbd>-c</kbd> prints out a copyright statement
  *  </li>
  *  <li>
@@ -141,12 +129,11 @@ try
     $options = array(
         'usage|u' => 'Usage - this text',
         'help|h' => 'Help (alias for --usage|-u)',
-        'version|V' => 'Version',
         'copyright|c' => 'Copyright statement'
     );
 
     //  $objOptions will be a Zend_Console_Getopt object
-    $getopt =   new Zend_Console_Getopt($options);
+    $getopt = new Zend_Console_Getopt($options);
 
     //  set explict case sensitiveness
     $getopt->setOption('ignoreCase', false);
@@ -164,13 +151,6 @@ catch(Zend_Console_Getopt_Exception $exception)
 if( (true === isset($getopt->u)) or (true === isset($getopt->h)) )
 {
     usage($getopt);
-    exit(0);
-}
-
-//  Should the version information be shown?
-if(true === isset($getopt->V))
-{
-    version();
     exit(0);
 }
 
