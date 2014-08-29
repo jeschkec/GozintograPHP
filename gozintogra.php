@@ -202,6 +202,8 @@ try
     {
         throw new Exception('Can not start map element');
     }
+
+    $xmlWriter->writeAttributeNS('xmlns', 'xsi', null, 'https://raw.githubusercontent.com/jeschkec/GozintograPHP/master/lib/gozintographp.xsd');
 }
 catch(Exception $exception)
 {

@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
-<map>
-  <source file="demo.php">
+<map xmlns:xsi="https://raw.githubusercontent.com/jeschkec/GozintograPHP/master/lib/gozintographp.xsd">
+  <source file="demo/demo.php">
+    <entry method="include" target="foo.php"/>
     <entry method="include" target="foo.php"/>
     <entry method="include_once" target="bar.php"/>
     <entry method="require" target="foo.php"/>
