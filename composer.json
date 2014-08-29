@@ -15,9 +15,24 @@
         "issues": "https://github.com/jeschkec/GozintograPHP/issues"
     },
 
-    "require": {
+    "require-dev": {
         "php": ">=5.3.3",
         "zf1/zend-console-getopt": "~1.12",
-        "phploc/phploc": "*"
+        "phploc/phploc": "*",
+        "phpunit/phpunit": "*",
+        "pdepend/pdepend": "*",
+        "phpmd/phpmd": "*",
+        "phploc/phploc": "*",
+        "phpdocumentor/phpdocumentor": "2.7.0",
+        "sebastian/phpcpd": "*"
+    },
+
+    "require": {
+        "php": ">=5.3.3",
+        "zf1/zend-console-getopt": "~1.12"
+    },
+
+    "config": {
+        "bin-dir": "vendor/bin/"
     }
 }

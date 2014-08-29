@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="GozintograPHP" default="build">
+    <property name="path" value="gozintogra.php" />
+    <property name="build" value="build/" />
+
+    <php expression="include('vendor/autoload.php')"/>
+
+    <target name="clean">
+        <delete file="${path}" failonerror="false"/>
+    </target>
+
+    <target name="phpunit" depends="clean">
+        <phpunit
+                codecoverage="false"
+                haltonfailure="true"
+                haltonerror="true"
+                configuration="phpunit.xml"
+                printsummary="true"
+            >
+            <batchtest>
+                <fileset dir="tests/">
+                    <include name="**/*Test*.php"/>
+                    <exclude name="**/Abstract*.php"/>
+                </fileset>
+            </batchtest>
+        </phpunit>
+    </target>
+
+    <target name="build" depends="phpunit">
+        <!-- build the executable -->
+        <append destFile="${path}">
+            <filelist dir="src/" files="gozintogra.php,lib/Gozintogra.php" />
+        </append>
+
+        <!-- set executable bit -->
+        <chmod file="${path}" mode="755" verbose="true" />
+    </target>
+</project>

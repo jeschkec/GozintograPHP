@@ -1,6 +1,6 @@
 <?php
 //  expand include path to lib/ directory
-ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . dirname(__FILE__) . PATH_SEPARATOR .  '../');
+ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . dirname(__FILE__) . PATH_SEPARATOR .  'src/');
 
 /**
  *  GozintograPHP is the main library and does all the work

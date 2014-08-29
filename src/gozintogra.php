@@ -64,9 +64,6 @@ function defaultErrorHandler($errNumber, $errMessage, $errFile, $errLine)
 //  set default error handler
 set_error_handler('defaultErrorHandler');
 
-//  expand include path to lib/ directory
-ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . dirname(__FILE__));
-
 //  be sure, register_argv_argc will be filled
 ini_set('register_argv_argc', 'On');
 
@@ -97,13 +94,8 @@ function copyright()
 }
 
 /**
- *  GozintograPHP is the main library and does all the work
- */
-require_once('lib/Gozintogra.php');
-
-
-/**
- *  Zend_Console_Getopt is used to handle the console options
+ * Zend_Console_Getopt is used to handle the console options
+ * @todo The libraries have to be written into one single file
  */
 require 'vendor/autoload.php';
 
@@ -251,3 +243,4 @@ catch(Exception $exception)
 //  write xml stream to STDOUT
 fwrite(STDOUT, $xmlWriter->outputMemory());
 exit(0);
+?>
