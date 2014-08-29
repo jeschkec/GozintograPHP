@@ -25,7 +25,6 @@ to your `$PATH` for more convenient usage.
 <pre>Usage: ./gozintogra.php [ options ] FILE [,FILE [, ...]]
 --usage|-u           Usage - this text
 --help|-h            Help (alias for --usage|-u)
---version|-V         Version
 --copyright|-c       Copyright statement</pre>
 
 ## Todo ##
