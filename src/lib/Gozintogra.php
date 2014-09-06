@@ -197,7 +197,7 @@ final class GozintograPHP
      *  @return string                  XML Structure
      *  @throws Exception
      */
-    final public function dump(XMLWriter $xmlWriter)
+    final public function dump(\XMLWriter $xmlWriter)
     {
         if(false === $xmlWriter->openMemory())
         {

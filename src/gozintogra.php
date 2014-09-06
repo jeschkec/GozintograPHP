@@ -8,6 +8,8 @@
  *  @copyright  (c) 2008 Christoph Jeschke
  */
 
+namespace GozintograPHP;
+
 /**
  *  defaultExceptionHandler bubbles up a uncought exception to the
  *  defautlt error handler defaultErrorHandler()
@@ -21,7 +23,7 @@ function defaultExceptionHandler($exception)
 }
 
 //  set default exception handler
-set_exception_handler('defaultExceptionHandler');
+set_exception_handler('\GozintograPHP\defaultExceptionHandler');
 
 /**
  *  The default error handler defaultErrorHandler writes the error message
@@ -62,7 +64,7 @@ function defaultErrorHandler($errNumber, $errMessage, $errFile, $errLine)
 }
 
 //  set default error handler
-set_error_handler('defaultErrorHandler');
+set_error_handler('\GozintograPHP\defaultErrorHandler');
 
 //  be sure, register_argv_argc will be filled
 ini_set('register_argv_argc', 'On');
@@ -76,7 +78,7 @@ ini_set('register_argv_argc', 'On');
  *  @param  object  $options Zend_Console_Getopt Object
  *  @see    Zend_Console_Getopt
  */
-function usage(Zend_Console_Getopt $options)
+function usage(\Zend_Console_Getopt $options)
 {
     $options->getUsageMessage();
 }
@@ -125,7 +127,7 @@ try
     );
 
     //  $objOptions will be a Zend_Console_Getopt object
-    $getopt = new Zend_Console_Getopt($options);
+    $getopt = new \Zend_Console_Getopt($options);
 
     //  set explict case sensitiveness
     $getopt->setOption('ignoreCase', false);
@@ -133,7 +135,7 @@ try
     //  Parse options
     $getopt->parse();
 }
-catch(Zend_Console_Getopt_Exception $exception)
+catch(\Zend_Console_Getopt_Exception $exception)
 {
     echo $exception->getUsageMessage();
     exit(3);
@@ -169,7 +171,7 @@ try
         throw new Zend_Console_Getopt_Exception('No files given');
     }
 }
-catch(Zend_Console_Getopt_Exception $exception)
+catch(\Zend_Console_Getopt_Exception $exception)
 {
     echo $getopt->getUsageMessage();
     exit(3);
@@ -177,7 +179,7 @@ catch(Zend_Console_Getopt_Exception $exception)
 
 try
 {
-    $xmlWriter = new XMLWriter();
+    $xmlWriter = new \XMLWriter();
 
     /**
      *  @throws  Exception
@@ -213,7 +215,7 @@ foreach($files as $File)
         $gozintographp = new GozintograPHP($File);
         $gozintographp->read();
         $gozintographp->parse();
-        $gozintographp->dump(new XMLWriter);
+        $gozintographp->dump(new \XMLWriter);
     }
     catch(Exception $exception)
     {
