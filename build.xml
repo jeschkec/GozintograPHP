@@ -5,11 +5,21 @@
 
     <php expression="include('vendor/autoload.php')"/>
 
-    <target name="clean">
+    <target name="-build-files">
+        <!-- build the executable -->
+        <append destFile="${path}">
+            <filelist dir="src/" files="gozintogra.php,lib/Gozintogra.php" />
+        </append>
+
+        <!-- set executable bit -->
+        <chmod file="${path}" mode="755" verbose="true" />
+    </target>
+
+    <target name="-clean">
         <delete file="${path}" failonerror="false"/>
     </target>
 
-    <target name="phpunit" depends="clean">
+    <target name="-run-tests">
         <phpunit
                 codecoverage="false"
                 haltonfailure="true"
@@ -26,13 +36,18 @@
         </phpunit>
     </target>
 
-    <target name="build" depends="phpunit">
-        <!-- build the executable -->
-        <append destFile="${path}">
-            <filelist dir="src/" files="gozintogra.php,lib/Gozintogra.php" />
-        </append>
+    <target name="build">
+        <phingcall target="-clean" />
+        <phingcall target="-build-files" />
+        <phingcall target="-run-tests" />
+    </target>
 
-        <!-- set executable bit -->
-        <chmod file="${path}" mode="755" verbose="true" />
+    <target name="clean">
+        <phingcall target="-clean" />
+    </target>
+
+    <target name="tests">
+        <phingcall target="-build-files" />
+        <phingcall target="-run-tests" />
     </target>
 </project>
