@@ -128,7 +128,7 @@ namespace GozintograPHP {
             'xmlns',
             'xsi',
             null,
-            'https://raw.githubusercontent.com/jeschkec/GozintograPHP/master/lib/gozintographp.xsd'
+            'https://raw.githubusercontent.com/jeschkec/GozintograPHP/master/src/main/ressources/schema/gozintographp.xsd'
         );
 
     } catch (Exception $exception) {
