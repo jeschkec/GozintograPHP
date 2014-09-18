@@ -38,7 +38,7 @@ final class Application
      *  @var array  Token structure from file, default is <b>NULL</b>
      */
     private $tokens = null;
-    
+
     /**
      *  @var array  Relevant tokens, default is <b>NULL</b>
      */
@@ -92,6 +92,32 @@ final class Application
         {
             $this->fileName = $fileName;
         }
+    }
+
+    /**
+     *  Show copyright information
+     *
+     *  Extends the version information with copyright informations
+     *  @see    usage()
+     */
+    public static function getCopyright()
+    {
+        return  '(c) Christoph Jeschke, 2008-2014' . PHP_EOL .
+                'Report bugs to <gozintograph@christoph-jeschke.de>' . PHP_EOL;
+    }
+
+    /**
+     *  Show usage information
+     *
+     *  Uses the Zend_Console_Getopt getUsageMessage() method to show
+     *  usage information
+     *
+     *  @param  object  $options Zend_Console_Getopt Object
+     *  @see    Zend_Console_Getopt
+     */
+    public static function getUsage(\Zend_Console_Getopt $options)
+    {
+        return $options->getUsageMessage();
     }
     
     /**
