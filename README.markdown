@@ -6,7 +6,7 @@
 A gozintograph is a directed (asymmetric) graph taken from **manufacturing and production theory**
 and shows the parts that goes (goz) into. It's name is derived from the fictional italian mathematican
 *Zepartzat Gozinto*, literally means "the parts that goes into", coined by real world mathematican
-Andrew Vazsonyi.
+[Andrew Vazsonyi](http://en.wikipedia.org/wiki/Andrew_V%C3%A1zsonyi]).
 
 ## Requirements ##
 * [Composer](https://getcomposer.org/) will install all requirements.
