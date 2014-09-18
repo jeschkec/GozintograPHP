@@ -2,6 +2,7 @@
     "name": "GozintograPHP",
     "license": "BSD-3-Clause",
     "homepage": "https://github.com/jeschkec/GozintograPHP",
+    "version": "2.0.0",
     "authors": [
         {
             "name": "Christoph Jeschke",
@@ -17,14 +18,7 @@
 
     "require-dev": {
         "php": ">=5.3.3",
-        "zf1/zend-console-getopt": "~1.12",
-        "phploc/phploc": "*",
-        "phpunit/phpunit": "*",
-        "pdepend/pdepend": "*",
-        "phpmd/phpmd": "*",
-        "phploc/phploc": "*",
-        "phpdocumentor/phpdocumentor": "2.7.0",
-        "sebastian/phpcpd": "*"
+        "zf1/zend-console-getopt": "~1.12"
     },
 
     "require": {
@@ -32,7 +26,15 @@
         "zf1/zend-console-getopt": "~1.12"
     },
 
+    "bin": [
+        "src/bin/gozintogra.php"
+    ],
+
     "config": {
         "bin-dir": "vendor/bin/"
+    },
+
+    "autoload": {
+        "psr-0": { "GozintograPHP": "src/main/library" }
     }
 }

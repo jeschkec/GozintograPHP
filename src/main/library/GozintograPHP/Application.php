@@ -8,7 +8,10 @@
  *  @license    BSD Style License https://github.com/jeschkec/GozintograPHP/blob/master/LICENSE
  *  @copyright  (c) 2008 Christoph Jeschke
  */
-final class GozintograPHP
+
+namespace GozintograPHP;
+
+final class Application
 {
     /**
      *  @var array  Key Zend Inclusion and Require Tokens
