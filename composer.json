@@ -23,7 +23,9 @@
 
     "require": {
         "php": ">=5.3.3",
-        "zf1/zend-console-getopt": "~1.12"
+        "zf1/zend-console-getopt": "~1.12",
+        "psr/log": "dev-master",
+        "monolog/monolog": "1.0.*"
     },
 
     "bin": [
@@ -35,6 +37,10 @@
     },
 
     "autoload": {
-        "psr-4": { "GozintograPHP\\": ["src/main/GozintograPHP"] }
+        "psr-4": {
+            "GozintograPHP\\": "src/main/GozintograPHP",
+            "Psr\\Log\\": "vendor/psr/log",
+            "Monolog\\Logger\\": "vendor/monolog/monolog/src"
+        }
     }
 }

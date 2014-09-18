@@ -84,7 +84,7 @@ final class Application
     public function __construct($fileName = null)
     {
         if (true === is_null($fileName)) {
-            throw new Exception('No filename was given', 1);
+            throw new \Exception('No filename was given', 1);
         } else {
             $this->fileName = $fileName;
         }
@@ -140,23 +140,23 @@ final class Application
         }
         
         if (true === is_null($this->fileName)) {
-            throw new Exception('No File to parse');
+            throw new \Exception('No File to parse');
         }
         
         $fileContent    =   file_get_contents($this->fileName);
         
         if ($fileContent === false) {
-            throw new Exception('File could not be read');
+            throw new \Exception('File could not be read');
         }
         
         if (strlen($fileContent) < 6) {
-            throw new Exception('File ist a way to short');
+            throw new \Exception('File ist a way to short');
         }
         
         $tokens     =   token_get_all($fileContent);
         
         if (sizeof($tokens) < 2) {
-            throw new Exception('Could not extract enough tokens');
+            throw new \Exception('Could not extract enough tokens');
         } else {
             $this->tokens = $tokens;
         }
@@ -171,7 +171,7 @@ final class Application
         $tokenStack    =   array();
         
         if (true === is_null($this->tokens)) {
-            throw new Exception('Nothing to do. Move along.');
+            throw new \Exception('Nothing to do. Move along.');
         }
         
         $mergedTokens    =   array_merge($this->includeTokens, $this->valueTokens);
@@ -185,7 +185,7 @@ final class Application
         $tokenStackSize = sizeof($tokenStack);
         
         if ($tokenStackSize < 2) {
-            throw new Exception('Not enough tokens to parse');
+            throw new \Exception('Not enough tokens to parse');
         }
         
         for ($i = 0; $i < $tokenStackSize; $i++) {
@@ -212,37 +212,37 @@ final class Application
     final public function dump(\XMLWriter $xmlWriter)
     {
         if (false === $xmlWriter->openMemory()) {
-            throw new Exception('Can not open XMLWriter Memory');
+            throw new \Exception('Can not open XMLWriter Memory');
         }
         
         if (false === $xmlWriter->startElement('source')) {
-            throw new Exception('Can not start source element');
+            throw new \Exception('Can not start source element');
         }
         
         if (false === $xmlWriter->writeAttribute('file', $this->fileName)) {
-            throw new Exception('Can not write file attribute to source element');
+            throw new \Exception('Can not write file attribute to source element');
         }
         
         foreach ($this->relevantTokens as $token) {
             if (false === $xmlWriter->startElement('entry')) {
-                throw new Exception("Can not start entry element for {$token['target']}");
+                throw new \Exception("Can not start entry element for {$token['target']}");
             }
             
             if (false === $xmlWriter->writeAttribute('method', $token['method'])) {
-                throw new Exception("Can not write method attribute to {$token['target']}");
+                throw new \Exception("Can not write method attribute to {$token['target']}");
             }
             
             if (false === $xmlWriter->writeAttribute('target', $token['target'])) {
-                throw new Exception("Can not write target attribute to {$token['target']}");
+                throw new \Exception("Can not write target attribute to {$token['target']}");
             }
         
             if (false === $xmlWriter->endElement()) {
-                throw new Exception("Can not close entry element for {$token['target']}");
+                throw new \Exception("Can not close entry element for {$token['target']}");
             }
         }
         
         if (false === $xmlWriter->endElement()) {
-            throw new Exception('Can not close source element');
+            throw new \Exception('Can not close source element');
         }
         
         $this->tokenAsXml = $xmlWriter->outputMemory();

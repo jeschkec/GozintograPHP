@@ -13,6 +13,13 @@ namespace GozintograPHP;
 
 final class ErrorHandler
 {
+    public $logger;
+
+    public function __construct($logger)
+    {
+        $this->logger = $logger;
+    }
+
     /**
      *  The default error handler defaultErrorHandler writes the error message
      *  to STDERR as a csv string (separator is ;, enclosing is ").
@@ -32,21 +39,9 @@ final class ErrorHandler
      *  @param  int     error line
      *  @return int     1
      */
-    public static function setDefaultErrorHandler($errNumber, $errMessage, $errFile, $errLine)
+    public function setDefaultErrorHandler($number, $message, $file, $line)
     {
-        $errDetails = array(
-            date('c'),              //  current ISO8601 formatted date
-            $errNumber,             //  Error level number
-            $errFile,               //  source file
-            $errLine,               //  source line
-            $errMessage,            //  The error message
-        );
-
-        if (false === is_resource(STDERR)) {
-            trigger_error('STDERR is not availiable', E_USER_ERROR);
-        }
-
-        fputcsv(STDERR, $errDetails, ';', '"');
-        exit($errNumber);
+        $message = sprintf('[%s] %s at %s, Line %d', $number, $message, $file, $line);
+        $this->logger->addError($message);
     }
 }
