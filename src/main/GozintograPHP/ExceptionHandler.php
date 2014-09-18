@@ -20,7 +20,7 @@ final class ExceptionHandler
      *  @see    defaultErrorHandler
      *  @param  object  Exception object
      */
-    public static function defaultExceptionHandler($exception)
+    public static function setDefaultExceptionHandler($exception)
     {
         trigger_error($exception->getMessage());
     }

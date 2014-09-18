@@ -32,7 +32,7 @@ final class ErrorHandler
      *  @param  int     error line
      *  @return int     1
      */
-    public static function defaultErrorHandler($errNumber, $errMessage, $errFile, $errLine)
+    public static function setDefaultErrorHandler($errNumber, $errMessage, $errFile, $errLine)
     {
         $errDetails = array(
             date('c'),              //  current ISO8601 formatted date

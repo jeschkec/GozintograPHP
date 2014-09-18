@@ -35,6 +35,6 @@
     },
 
     "autoload": {
-        "psr-0": { "GozintograPHP": "src/main/library" }
+        "psr-4": { "GozintograPHP\\": ["src/main/GozintograPHP"] }
     }
 }
