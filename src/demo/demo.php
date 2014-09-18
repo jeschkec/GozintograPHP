@@ -44,4 +44,3 @@ require_once 'bar.php';
  *  include file referenced by $foo
  */
 include $foo;
-?>

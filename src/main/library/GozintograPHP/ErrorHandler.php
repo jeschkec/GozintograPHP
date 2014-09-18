@@ -42,14 +42,11 @@ final class ErrorHandler
             $errMessage,            //  The error message
         );
 
-        if(false === is_resource(STDERR))
-        {
+        if (false === is_resource(STDERR)) {
             trigger_error('STDERR is not availiable', E_USER_ERROR);
         }
 
         fputcsv(STDERR, $errDetails, ';', '"');
         exit($errNumber);
     }
-
-
 }
