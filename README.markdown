@@ -8,18 +8,11 @@ and shows the parts that goes (goz) into. It's name is derived from the fictiona
 *Zepartzat Gozinto*, literally means "the parts that goes into", coined by real world mathematican
 Andrew Vazsonyi.
 
-## Requirements ##
- - `PHP 5.1.2` or newer
- - `Zend_Console_Getopt` (bundled)
- - `Perl 5` (for Perl image generator)
- - `GraphViz` (for Perl image generator)
- - `XML::Parser` (for Perl image generator)
- - `XML::Simple` (for Perl image generator)
- - `XML::SimpleObject` (for Perl image generator)
-
 ## Installation ##
-Download / pull the source and extract it to a directory for your choice. You might add it
-to your `$PATH` for more convenient usage.
+* `git clone https://github.com/jeschkec/GozintograPHP`
+* `cd GozintograPHP/`
+* `composer install`
+* `./src/bin/
 
 ## Usage ##
 <pre>Usage: ./gozintogra.php [ options ] FILE [,FILE [, ...]]
